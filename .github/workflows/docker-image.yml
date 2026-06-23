@@ -34,4 +34,4 @@ jobs:
     - name: Push Docker Image
       run: |
         docker push altamiranohernandezalan731/graphql-app:0.0.2
-        docker build -t altamiranohernandezalan731/graphql-app:latest
+        docker push altamiranohernandezalan731/graphql-app:latest
