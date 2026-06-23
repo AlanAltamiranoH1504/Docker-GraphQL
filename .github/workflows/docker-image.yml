@@ -36,17 +36,21 @@ jobs:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "New version: $NEW_VERSION !!!!"
-    # # Construccion de la imagen de docker
-    # - name: Build Docker Image
-    #   run: |
-    #     docker build -t altamiranohernandezalan731/graphql-app:0.0.2 .
-    #     docker build -t altamiranohernandezalan731/graphql-app:latest .
-    # # Push de imagen de docker
-    # - name: Push Docker Image
-    #   run: |
-    #     docker push altamiranohernandezalan731/graphql-app:0.0.2
-    #     docker push altamiranohernandezalan731/graphql-app:latest
+        
+    # Construccion de la imagen de docker
+    - name: Build Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker build -t altamiranohernandezalan731/graphql-app:$NEW_VERSION .
+        docker build -t altamiranohernandezalan731/graphql-app:latest .
+    # Push de imagen de docker
+    - name: Push Docker Image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push altamiranohernandezalan731/graphql-app:$NEW_VERSION
+        docker push altamiranohernandezalan731/graphql-app:latest
 
 
 
